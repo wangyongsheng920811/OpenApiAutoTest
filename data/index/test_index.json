@@ -1,0 +1,12 @@
+{
+    "test_info": {
+        "path": "/v3/manager/info",
+        
+        "test_common": {
+            "desc": "获取个人信息",
+            "method": "get",
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != None"
+        }
+    }
+}

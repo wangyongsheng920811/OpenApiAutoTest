@@ -1,0 +1,170 @@
+{
+    "test_clients_list": {
+        "path": "/v3/clients",
+
+        "test_common": {
+            "desc": "获取商户列表",
+            "method": "get",
+            "params": {
+                "offset": 0,
+                "limit": 15
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('count') != 0"
+        }
+    },
+
+    "test_clients_optional_permissions": {
+        "path": "/v3/optional_permissions",
+
+        "test_common": {
+            "desc": "商户可选权限列表",
+            "method": "get",
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != []"
+        }
+      },
+
+    "test_clients_business": {
+        "path": "/v3/business",
+
+        "test_common": {
+            "desc": "获取商户对接人列表",
+            "method": "get",
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != []"
+        }
+    },
+
+    "test_search_client_keyword": {
+        "path": "/v3/clients",
+
+        "test_search_by_keyword": {
+            "desc": "根据商户名称／手机号搜索商户",
+            "method": "get",
+            "params": {
+                "offset": 0,
+                "limit": 15,
+                "keyword": "{}"
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('count') != 0"
+        }
+    },
+
+    "test_search_client_id": {
+        "path": "/v3/clients",
+
+        "test_search_by_id": {
+            "desc": "根据商户ID搜索商户",
+            "method": "get",
+            "params": {
+                    "offset": 0,
+                    "limit": 15,
+                    "id": "{}"
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('count') != 0"
+        }
+    },
+
+    "test_search_client_by_id_keyword": {
+        "path": "/v3/clients",
+
+        "test_search_by_combination": {
+            "desc": "根据商户ID和手机号／名称搜索商户",
+            "method": "get",
+            "params": {
+                    "offset": 0,
+                    "limit": 15,
+                    "id": "92237",
+                    "keyword": "11099990066"
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('count') == 1"
+        }
+    },
+
+
+    "test_add_client": {
+        "path": "/v3/clients",
+
+        "test_add_client": {
+            "desc": "添加月结商户",
+            "method": "post",
+            "params": {
+                "name": "自动化月结商户",
+                "telephone": "11099990044",
+                "company_city": "天津市",
+                "tags": [1360011036],
+                "permission_ids": [27, 1872252479, 87, 478106253, 547184045, 71728323, 1943760209, 110, 200, 201, 203, 204, 205, 206, 207, 208, 209, 210, 211],
+                "abutment_user_id": 2418,
+                "settle_type": 2,
+                "payment_type": 1,
+                "install_ticket_limit": 0,
+                "client_type": 1,
+                "is_normal_client": true,
+                "no_contract_install": 1
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('client_id') != None"
+        },
+
+        "test_add_existed_client": {
+            "desc": "添加已存在的商户",
+            "method": "post",
+            "params": {
+                "name": "自动化已存在商户",
+                "telephone": "11099990013",
+                "company_city": "天津市",
+                "tags": [1360011036],
+                "permission_ids": [27, 1872252479, 87, 478106253, 547184045, 71728323, 1943760209, 110, 200, 201, 203, 204, 205, 206, 207, 208, 209, 210, 211],
+                "abutment_user_id": 2418,
+                "settle_type": 2,
+                "payment_type": 1,
+                "install_ticket_limit": 0,
+                "client_type": 1,
+                "is_normal_client": true,
+                "no_contract_install": 1
+            },
+            "check_res_code": 400002,
+            "check_res_data": "res.json().get('err_msg') == '用户已存在'"
+        }
+
+    },
+
+    "test_freeze_client": {
+          "path": "/v3/clients/{}/freeze",
+
+          "test_freeze_client": {
+              "desc": "冻结商户",
+              "method": "put",
+              "params": {
+                  "status": true
+              },
+              "check_res_code": 0,
+              "check_res_data": "res.json().get('result') == [1]"
+          },
+
+          "test_unfreeze_client": {
+              "desc": "解冻商户",
+              "method": "put",
+              "params": {
+                  "status": false
+              },
+              "check_res_code": 0,
+              "check_res_data": "res.json().get('result') == [1]"
+          }
+    },
+
+    "test_delete_client": {
+          "path": "/v3/clients/{}",
+
+          "test_delete_client": {
+              "desc": "删除商户",
+              "method": "delete",
+              "check_res_code": 0,
+              "check_res_data": ""
+          }
+    }
+}

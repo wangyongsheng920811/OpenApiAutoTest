@@ -1,0 +1,860 @@
+{
+    "test_get_tickets_list_1": {
+        "path": "/v3/tickets/1",
+        
+        "test_common": {
+            "desc": "获取新装工单列表",
+            "method": "get",
+            "params": {
+                "offset": 0,
+                "limit": 10
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('count') != 0"
+        }
+    },
+    
+    "test_get_tickets_list_2": {
+        "path": "/v3/tickets/2",
+        
+        "test_common": {
+            "desc": "获取维修工单列表",
+            "method": "get",
+            "params": {
+                "offset": 0,
+                "limit": 10
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('count') != 0"
+        }
+    },
+    
+    "test_get_tickets_list_3": {
+        "path": "/v3/tickets/3",
+        
+        "test_common": {
+            "desc": "获取拆卸工单列表",
+            "method": "get",
+            "params": {
+                "offset": 0,
+                "limit": 10
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('count') != 0"
+        }
+    },
+    
+    "test_get_tickets_list_4": {
+        "path": "/v3/tickets/4",
+        
+        "test_common": {
+            "desc": "获取重装工单列表",
+            "method": "get",
+            "params": {
+                "offset": 0,
+                "limit": 10
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('count') != 0"
+        }
+    },
+    
+    "test_export_tickets_1": {
+        "path": "/v3/tickets/1/export",
+        
+        "test_common": {
+            "desc": "导出新装工单",
+            "method": "get",
+            "params": {
+                "client": 92091,
+                "state": ["6"],
+                "start_time": 1572537600000,
+                "end_time": 1574265599999
+            },
+            "check_res_code": null,
+            "check_res_data": "res.content != None and res.status_code == 200"
+        }
+    },
+    
+    "test_export_tickets_2": {
+        "path": "/v3/tickets/2/export",
+        
+        "test_common": {
+            "desc": "导出维修工单",
+            "method": "get",
+            "params": {
+                "client": 92091,
+                "state": ["6"],
+                "start_time": 1572537600000,
+                "end_time": 1574265599999
+            },
+            "check_res_code": null,
+            "check_res_data": "res.content != None and res.status_code == 200"
+        }
+    },
+    
+    "test_export_tickets_3": {
+        "path": "/v3/tickets/3/export",
+        
+        "test_common": {
+            "desc": "导出拆卸工单",
+            "method": "get",
+            "params": {
+                "client": 92091,
+                "state": ["6"],
+                "start_time": 1572537600000,
+                "end_time": 1574265599999
+            },
+            "check_res_code": null,
+            "check_res_data": "res.content != None and res.status_code == 200"
+        }
+    },
+    
+    "test_export_tickets_4": {
+        "path": "/v3/tickets/4/export",
+        
+        "test_common": {
+            "desc": "导出重装工单",
+            "method": "get",
+            "params": {
+                "client": 92091,
+                "state": ["6"],
+                "start_time": 1572537600000,
+                "end_time": 1574265599999
+            },
+            "check_res_code": null,
+            "check_res_data": "res.content != None and res.status_code == 200"
+        }
+    },
+    
+    "test_get_tickets_count": {
+        "path": "/v3/tickets/count",
+        
+        "test_common_1": {
+            "desc": "获取安装工单数量",
+            "method": "get",
+            "params": {
+                "service_type": 1
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('total').get('delay') != 0"
+        },
+        
+        "test_common_2": {
+            "desc": "获非安装工单数量",
+            "method": "get",
+            "params": {
+                "service_type": 2
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('total').get('delay') != 0"
+        }
+    },
+    
+    "test_add_ticket_1": {
+        "path": "/v3/tickets/1",
+        
+        "test_add_ticket": {
+            "desc": "增加新装工单",
+            "method": "post",
+            "params": {
+                "appoint_channel": 1,
+                "subscribe": {
+                    "name": "卫斯理",
+                    "phone": "18640573589",
+                    "note": "接口测试",
+                    "expected_time": {},
+                    "expected_period": 1
+                },
+                "contact_person": {
+                    "name": "卫斯理",
+                    "phone": "18640573589"
+                },
+                "product_device_list": [
+                    {}
+                ],
+                "home_id": 1639921980,
+                "faults": [
+                    {
+                    "room_id": 1133192648
+                    }
+                ],
+                "service_target": 2
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('ticket_sn') != None"
+        }
+    },
+    
+    "test_add_ticket_2": {
+        "path": "/v3/tickets/2",
+        
+        "test_add_ticket": {
+            "desc": "增加维修工单",
+            "method": "post",
+            "params": {
+                "appoint_channel": 1,
+                "subscribe": {
+                    "name": "卫斯理",
+                    "phone": "18640573589"
+                },
+                "contact_person": {
+                    "name": "卫斯理",
+                    "phone": "18640573589"
+                },
+                "product_device_list": [
+                    {}
+                ],
+                "home_id": 2114282118,
+                "faults": [
+                    {
+                    "room_id": 644383369,
+                    "device_id": 1770467756,
+                    "description": "接口测试",
+                    "fault_time": {}
+                    }
+                ],
+                "service_target": -1
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('ticket_sn') != None"
+        }
+    },
+    
+    "test_reject_ticket": {
+        "path": "/v3/tickets/{}/reject_ticket",
+        
+        "test_reject_ticket": {
+            "desc": "打回工单",
+            "method": "put",
+            "params": {"ticket_id": {}, "description": "接口测试打回工单"},
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != None"
+        }
+    },
+
+    "test_service_ack": {
+        "path": "/v3/tickets/{}/service_ack",
+        
+        "test_service_ack": {
+            "desc": "客服受理工单",
+            "method": "put",
+            "params": {
+                "ticket_id": {}
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('ticketOp') != None"
+        }
+    },
+    
+    "test_add_ticket_3": {
+        "path": "/v3/tickets/3",
+        
+        "test_add_ticket": {
+            "desc": "增加拆卸工单",
+            "method": "post",
+            "params": {
+                "appoint_channel": 1,
+                "subscribe": {
+                    "name": "卫斯理",
+                    "phone": "18640573589"
+                },
+                "contact_person": {
+                    "name": "卫斯理",
+                    "phone": "18640573589"
+                },
+                "product_device_list": [
+                    {}
+                ],
+                "home_id": 1639921980,
+                "faults": [
+                    {
+                    "room_id": 1133192648,
+                    "device_id": 2125755413,
+                    "description": "接口测试",
+                    "fault_time": {}
+                    }
+                ],
+                "service_target": -1
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('ticket_sn') != None"
+        }
+    },
+    
+    "test_add_ticket_4": {
+        "path": "/v3/tickets/4",
+        
+        "test_add_ticket": {
+            "desc": "增加重装工单",
+            "method": "post",
+            "params": {
+                "appoint_channel": 1,
+                "subscribe": {
+                    "name": "卫斯理",
+                    "phone": "18640573589",
+                    "note": "接口测试",
+                    "expected_time": {},
+                    "expected_period": 1
+                },
+                "contact_person": {
+                    "name": "卫斯理",
+                    "phone": "18640573589"
+                },
+                "product_device_list": [
+                    {
+                    "device_product_id": 15,
+                    "estimate_quantity": 1,
+                    "maxCount": 1
+                    }
+                ],
+                "home_id": 2114282118,
+                "faults": [
+                    {
+                    "room_id": 1323234955
+                    }
+                ],
+                "service_target": 3
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('ticket_sn') != None"
+        }
+    },
+    
+    "test_show_tickets": {
+        "path": "/v3/tickets/{}/show",
+        
+        "test_show_tickets": {
+            "desc": "工单详情",
+            "method": "get",
+            "params": {
+                "service_type": {},
+                "ticket_id": {}
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json() != None"
+        }
+    },
+    
+    "test_dispatch_ticket": {
+        "path": "/v3/tickets/dispatch_ticket",
+        
+        "test_dispatch_ticket": {
+            "desc": "调度工单",
+            "method": "put",
+            "params": {
+                "ticket_list": [
+                    {
+                        "ticket_id": {},
+                        "ticket_devices": [
+                            {
+                                "id": {},
+                                "service_fault_id": 1231,
+                                "service_solution_id": 60
+                            }
+                        ]
+                    }
+                ],
+                "delivery_team_id": 30,
+                "respond_hour": 3
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('ticketOp') != None"
+        }
+    },
+    
+    "test_update_ticket_1": {
+        "path": "/v3/tickets/{}/update_ticket",
+        
+        "test_update_ticket_1": {
+            "desc": "编辑新装工单",
+            "method": "put",
+            "params": {
+                "subscribe": {
+                    "name": "卫斯理",
+                    "phone": "18640573589",
+                    "note": "接口测试编辑工单",
+                    "expected_period": 1,
+                    "expected_time": {}
+                },
+                "faults": [
+                    {
+                    "room_id": 1290818727
+                    },
+                    {
+                    "room_id": 1133192648
+                    }
+                ],
+                "change_service_target": 4
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('ticketOp') != None"
+        }
+    },
+    
+    "test_update_ticket_2": {
+        "path": "/v3/tickets/{}/update_ticket",
+        
+        "test_update_ticket_2": {
+            "desc": "编辑维修工单",
+            "method": "put",
+            "params": {
+                "faults": [
+                    {
+                    "id": {},
+                    "ticket_id": {},
+                    "room_id": 644383369,
+                    "room_name": "公区",
+                    "device_type": 1,
+                    "sn": "cnjl0011190600001913",
+                    "device_id": 1770467756,
+                    "description": "接口测试编辑工单",
+                    "fault_id": null,
+                    "service_fault_id": null,
+                    "fault_time": {},
+                    "note": "",
+                    "solution_id": null,
+                    "solution_name": "",
+                    "service_solution_name": null,
+                    "service_solution_id": null,
+                    "product_type": null,
+                    "fault": null,
+                    "service_fault": null
+                    }
+                ]
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('ticketOp') != None"
+        }
+    },
+    
+    "test_update_ticket_3": {
+        "path": "/v3/tickets/{}/update_ticket",
+        
+        "test_update_ticket_3": {
+            "desc": "编辑拆卸工单",
+            "method": "put",
+            "params": {
+                "faults": [
+                    {
+                    "id": {},
+                    "ticket_id": {},
+                    "room_id": 1133192648,
+                    "room_name": "公区",
+                    "device_type": 1,
+                    "sn": "cnjl0003190300001777",
+                    "device_id": 2125755413,
+                    "description": "接口测试编辑工单",
+                    "fault_id": null,
+                    "service_fault_id": null,
+                    "fault_time": {},
+                    "note": "",
+                    "solution_id": null,
+                    "solution_name": "",
+                    "service_solution_name": null,
+                    "service_solution_id": null,
+                    "product_type": null,
+                    "fault": null,
+                    "service_fault": null
+                    }
+                ]
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('ticketOp') != None"
+        }
+    },
+    
+    "test_update_ticket_4": {
+        "path": "/v3/tickets/{}/update_ticket",
+        
+        "test_update_ticket_4": {
+            "desc": "编辑重装工单",
+            "method": "put",
+            "params": {
+                "subscribe": {
+                    "name": "卫斯理",
+                    "phone": "18640573589",
+                    "note": "接口测试编辑工单"
+                },
+                "faults": [
+                    {
+                    "room_id": 1323234955
+                    }
+                ]
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('ticketOp') != None"
+        }
+    },
+    
+    "test_ticket_history": {
+        "path": "/v3/tickets/{}/history",
+        
+        "test_ticket_history": {
+            "desc": "工单操作历史",
+            "method": "get",
+            "params": null,
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != None"
+        }
+    },
+    
+    "test_add_service_remark": {
+        "path": "/v3/tickets/{}/service/remark",
+        
+        "test_add_service_remark": {
+            "desc": "添加客服备注",
+            "method": "post",
+            "params": {
+                "ticket_id": {},
+                "content": "客服备注"
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('content') == '客服备注'"
+        }
+    },
+    
+    "test_get_service_remark": {
+        "path": "/v3/tickets/{}/service/remark",
+        
+        "test_add_service_remark": {
+            "desc": "查询客服备注",
+            "method": "get",
+            "params": {
+                "ticket_id": {}
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result')[0].get('content') == '客服备注'"
+        }
+    },
+    
+    "test_get_contract": {
+        "path": "/v3/tickets/{}/contracts",
+        
+        "test_get_contract": {
+            "desc": "查询合同工单",
+            "method": "get",
+            "params": {
+                "ticket_id": {}
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != None"
+        }
+    },
+    
+    "test_match_contract": {
+        "path": "/v3/tickets/{}/match_contract",
+        
+        "test_match_contract": {
+            "desc": "工单匹配合同",
+            "method": "put",
+            "params": {
+                "ticket_id": {},
+                "contract_id": 101743
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') == 'ok'"
+        }
+    },
+    
+    "test_check_state": {
+        "path": "/v3/tickets/{}/devices/check_state",
+        
+        "test_check_state": {
+            "desc": "工单内绑定前查询要绑定的设备",
+            "method": "get",
+            "params": {
+                "sn": "cnjl0011190600001913",
+                "device_type": 1
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('state') != None"
+        }
+    },
+    
+    "test_alloc_ticket": {
+        "path": "/v3/tickets/alloc_ticket",
+        
+        "test_alloc_ticket": {
+            "desc": "指派工单",
+            "method": "put",
+            "params": {
+                "ticket_list": [
+                    {
+                        "ticket_id": {},
+                        "ticket_devices": [
+                            {
+                                "id": {},
+                                "service_fault_id": 1001,
+                                "service_solution_id": 1
+                            }
+                        ]
+                    }
+                ],
+                "user_id": 2335,
+                "respond_hour": 3
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('ticketOp') != None"
+        }
+    },
+    
+    "test_home_position": {
+        "path": "/v3/tickets/{}/home_position",
+        
+        "test_home_position": {
+            "desc": "重标房源位置",
+            "method": "put",
+            "params": {
+                "position": {
+                    "longitude": 113.93896484375,
+                    "latitude": 22.566207885742188
+                },
+                "type": 2,
+                "ticket_id": {}
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') == 'ok'"
+        }
+    },
+    
+    "test_signin_position": {
+        "path": "/v3/tickets/{}/signin_position",
+        
+        "test_signin_position": {
+            "desc": "签到",
+            "method": "post",
+            "params": {
+                "sign_position": {
+                    "longitude": 116.427625,
+                    "latitude": 40.044185
+                },
+                "ticket_id": {}
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('ticketOp') != None"
+        }
+    },
+    
+    "test_get_signin_position": {
+        "path": "/v3/tickets/{}/signin_position",
+        
+        "test_get_signin_position": {
+            "desc": "获取签到信息",
+            "method": "get",
+            "params": {
+                "ticket_id": {}
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != None"
+        }
+    },
+    
+    "test_accept_ticket": {
+        "path": "/v3/tickets/{}/accept_ticket",
+        
+        "test_accept_ticket": {
+            "desc": "确定预约时间",
+            "method": "put",
+            "params": {
+                "appointment_time": {},
+                "appointment_period": 1,
+                "description": "确定预约时间",
+                "ticket_id": {}
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('ticketOp') != None"
+        }
+    },
+    
+    "test_define_fault": {
+        "path": "/v3/tickets/{}/define_fault",
+        
+        "test_define_fault": {
+            "desc": "确定故障信息",
+            "method": "put",
+            "params": {
+                "faults": [
+                    {
+                        "room_id": {},
+                        "device_id": {},
+                        "fault_id": 1002,
+                        "solution_id": 3,
+                        "solution_name": "换网关",
+                        "file_ids": [456594733],
+                        "duty_tenant": false,
+                        "id": {}
+                    }
+                ],
+                "ticket_id": {}
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') == 'ok'"
+        }
+    },
+    
+    "test_get_define_fault": {
+        "path": "/v3/tickets/{}/define_fault",
+        
+        "test_get_define_fault": {
+            "desc": "获取最后一次工单错误解决方案",
+            "method": "get",
+            "params": {
+                "ticket_id": {},
+                "room_id": {},
+                "device_id": {}
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != None"
+        }
+    },
+    
+    "test_get_fault_id": {
+        "path": "/v3/tickets/fault/{}",
+        
+        "test_get_fault_id": {
+            "desc": "获取故障码列表",
+            "method": "get",
+            "params": {
+                "device_type": {},
+                "type": "1"
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != None"
+        }
+    },
+    
+    "test_get_solutions": {
+        "path": "/v3/tickets/solutions/{}",
+        
+        "test_get_solutions": {
+            "desc": "获取二级故障下的解决方案列表",
+            "method": "get",
+            "params": {
+                "fault_id": {},
+                "type": "1"
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != None"
+        }
+    },
+
+    "test_submit_ticket": {
+        "path": "/v3/tickets/{}/submit_ticket",
+        
+        "test_submit_ticket": {
+            "desc": "提交工单",
+            "method": "put",
+            "params": null,
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('ticketOp') != None"
+        }
+    },
+    
+    "test_turndown_ticket": {
+        "path": "/v3/tickets/{}/turndown_ticket",
+        
+        "test_turndown_ticket": {
+            "desc": "驳回工单",
+            "method": "put",
+            "params": null,
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != None"
+        }
+    },
+    
+    "test_show_devices": {
+        "path": "/v3/tickets/{}/show_devices",
+        
+        "test_show_devices": {
+            "desc": "获取工单安装设备详细信息",
+            "method": "get",
+            "params": null,
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != None"
+        }
+    },
+    
+    "test_ensure_pays": {
+        "path": "/v3/tickets/{}/repair/ensure_pays",
+        
+        "test_ensure_pays": {
+            "desc": "维修工单确定收费内容",
+            "method": "get",
+            "params": null,
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != None"
+        }
+    },
+    
+    "test_unbind_gateways": {
+        "path": "/v3/tickets/{}/rooms/1133192648/gateways/2125755413",
+        
+        "test_unbind_gateways": {
+            "desc": "解绑网关",
+            "method": "delete",
+            "params": {
+                "device_id": 2125755413,
+                "room_id": 1133192648,
+                "ticket_id": {},
+                "type": 6,
+                "is_good": 1
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') == 'ok'"
+        }
+    },
+    
+    "test_bind_gateways": {
+        "path": "/v3/tickets/{}/rooms/1133192648/gateways",
+        
+        "test_bind_gateways": {
+            "desc": "绑定网关",
+            "method": "post",
+            "params": {
+                "description": "auto_test",
+                "sn": "cnjl0003190300001777",
+                "ticket_id": {},
+                "room_id": 1133192648
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('device_id') == 2125755413"
+        }
+    },
+
+    "test_check_ticket": {
+        "path": "/v3/tickets/{}/check_ticket",
+        
+        "test_turndown_ticket": {
+            "desc": "验收工单",
+            "method": "put",
+            "params": null,
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != None"
+        }
+    },
+    
+    "test_shut_ticket": {
+        "path": "/v3/tickets/{}/shut_ticket",
+        
+        "test_shut_ticket": {
+            "desc": "取消工单",
+            "method": "put",
+            "params": {"description": "接口测试取消工单", "further_op": 1},
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != None"
+        }
+    },
+    
+    "test_duplicate_visit": {
+        "path": "/v3/tickets/duplicate_visit",
+        
+        "test_duplicate_visit": {
+            "desc": "标记为二次上门",
+            "method": "put",
+            "params": {"ticket_ids": {}},
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') == 'ok'"
+        }
+    }
+}

@@ -1,0 +1,508 @@
+{
+	"test_branches": {
+		"path": "/v3/clients/{}/branches",
+
+		"test_branches_info": {
+			"desc": "获取商户下门店信息",
+			"method": "get",
+
+			"check_res_code": 0,
+			"check_res_data": "res.json() != None"
+		}
+	},
+
+	"test_users_list": {
+		"path": "/v3/clients/{}/users",
+
+		"test_users_list": {
+			"desc": "获取商户下员工信息",
+			"method": "get",
+			"params": {
+				"offset": 0,
+				"limit": 10
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('result').get('count') != 0"
+		},
+
+		"test_search_by_keyword": {
+			"desc": "根据关键字搜索商户下员工信息",
+			"method": "get",
+			"params": {
+				"keyword": "11099990047",
+				"offset": 0,
+				"limit": 10
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('result').get('count') == 1"
+		},
+
+		"test_search_by_branches": {
+			"desc": "根据关键字搜索商户下员工信息",
+			"method": "get",
+			"params": {
+				"branch_id": "16087571",
+				"offset": 0,
+				"limit": 10
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('result').get('count') == 0"
+		}
+	},
+
+	"test_clients_log_types": {
+		"path": "/v3/operations/types",
+
+		"test_log_types": {
+			"desc": "获取商户操作日志分类",
+			"method": "get",
+
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('result').get('count') != 0"
+		}
+	},
+
+	"test_search_clients_log": {
+		"path": "/v3/operations",
+
+		"test_clients_log": {
+			"desc": "查询商户-更新商户用电配置",
+			"method": "get",
+			"params": {
+				"start_time": 1576512000000,
+				"end_time": 1576771199999,
+				"limit": 10,
+				"offset": 0,
+				"client_id": 92302,
+				"type_code": "client_elemeter_setting"
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('result').get('count') == 0"
+		}
+	},
+
+	"test_developer_show": {
+		"path": "/v3/clients/{}/developer_show",
+
+		"test_clients_log": {
+			"desc": "开发者选项",
+			"method": "get",
+
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok'"
+		}
+	},
+
+	"test_developer_setting": {
+		"path": "/v3/clients/{}/developer_setting",
+
+		"test_open_developer": {
+			"desc": "开启开发者",
+			"method": "put",
+			"params": {
+				"is_open":true,
+				"async_callback":"",
+				"event_callback":""
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok'"
+		},
+
+		"test_set_async_callback": {
+			"desc": "设置异步回调",
+			"method": "put",
+			"params": {
+				"is_open":false,
+				"async_callback":"123456789",
+				"event_callback":""
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok'"
+		},
+
+		"test_set_event_callback": {
+			"desc": "设置事件回调",
+			"method": "put",
+			"params": {
+				"is_open":false,
+				"async_callback":"",
+				"event_callback":"987654321"
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok'"
+		},
+
+		"test_cancel_developer_setting": {
+			"desc": "取消开发者选项设置",
+			"method": "put",
+			"params": {
+				"is_open":false,
+				"async_callback":"",
+				"event_callback":""
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok'"
+		}
+	},
+
+	"test_clients_finance": {
+		"path": "/v3/clients/{}/finance",
+
+		"test_clients_finance": {
+			"desc": "商户概览",
+			"method": "get",
+			"params": {
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok'"
+		},
+
+		"test_change_clients_payment_type": {
+			"desc": "修改商户结算配置为：先款后货+售后现金支付",
+			"method": "put",
+			"params": {
+				"settle_type":2,
+				"payment_type":3
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok'"
+		}
+	},
+
+	"test_clients_device_products": {
+		"path": "/v3/device_products",
+
+		"test_common": {
+			"desc": "商户产品信息（设备型号）",
+			"method": "get",
+			"params": {
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('result') != [] "
+		}
+	},
+
+	"test_clients_device_statistics": {
+		"path": "/v3/device_statistics",
+
+		"test_device_statistics": {
+			"desc": "商户设备统计（概览）",
+			"method": "get",
+			"params": {
+				"client_id": {}
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok' "
+		},
+
+		"test_filtering_device_statistics": {
+			"desc": "根据产品型号筛选设备统计（概览）-D3",
+			"method": "get",
+			"params": {
+				"client_id": {},
+				"device_product_id": 27
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok' "
+		}
+	},
+
+	"test_clients_biz_orders": {
+		"path": "/v3/biz_orders",
+
+		"test_biz_orders_list": {
+			"desc": "商户订单信息列表",
+			"method": "get",
+			"params": {
+				"client_id": {},
+				"limit": 10,
+				"offset": 0
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json() != None"
+		}
+	},
+
+	"test_search_clients_biz_orders": {
+		"path": "/v3/biz_orders",
+
+		"test_search_by_created_time": {
+			"desc": "根据创建时间筛选商户订单",
+			"method": "get",
+			"params": {
+				"client_id": {},
+				"limit": 10,
+				"offset": 0,
+				"start_time": 1577030400000,
+				"end_time": 1577721599999
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok'"
+		},
+
+		"test_search_by_keyword": {
+			"desc": "根据关键字筛选商户订单",
+			"method": "get",
+			"params": {
+				"client_id": {},
+				"limit": 10,
+				"offset": 0,
+				"keyword": "李暾"
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok'"
+		},
+
+		"test_search_by_time_and_keyword": {
+			"desc": "根据创建时间和关键字组合筛选商户订单",
+			"method": "get",
+			"params": {
+				"client_id": {},
+				"limit": 10,
+				"offset": 0,
+				"start_time": 1577030400000,
+				"end_time": 1577721599999,
+				"keyword": "李暾"
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok'"
+		}
+	},
+
+	"test_biz_order_devices": {
+		"path": "/v3/biz_orders/{}/biz_order_devices",
+
+		"test_order_devices": {
+			"desc": "查看商户某个订单的详情",
+			"method": "get",
+			"params": {
+				"limit": 20,
+				"offset": 0
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json() != None"
+		}
+	},
+
+	"test_return_order": {
+		"path": "/v3/biz_orders/{}/return_order",
+
+		"test_return_order": {
+			"desc": "退货",
+			"method": "get",
+			"params": {
+				"biz_order_device_ids": {},
+				"description":"自动化退货1",
+				"return_file":"https://lk-boss-server-2b.oss-cn-hangzhou.aliyuncs.com/1576824066818颜字图案.jpg"
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('success') == success"
+		}
+	},
+
+	"test_client_logo": {
+		"path": "/v3/clients/{}/client_logo",
+
+		"test_client_logo": {
+			"desc": "获取商户logo",
+			"method": "get",
+
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok' "
+		}
+	},
+
+	"test_client_vr_homes": {
+		"path": "/v3/clients/{}/vr_homes",
+
+		"test_is_or_not_vr_home": {
+			"desc": "是否为房源列表",
+			"method": "get",
+			"params": {
+				"limit": 10,
+				"offset": 0,
+				"is_vr_home": {}
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json() != None"
+		}
+	},
+
+	"test_add_delete_vr_home": {
+		"path": "/v3/clients/{}/vr_homes",
+
+		"test_add_vr_homes": {
+			"desc": "新增VR房源",
+			"method": "put",
+			"params": {
+				"home_ids":{},
+				"is_vr_home":true
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok' "
+		},
+
+		"test_delete_vr_homes": {
+			"desc": "移除VR房源",
+			"method": "put",
+			"params": {
+				"home_ids":{},
+				"is_vr_home":false
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok' "
+		}
+	},
+
+	"test_clients_vr_home_info": {
+		"path": "/v3/clients/{0}/homes/{1}/vr_home_info",
+
+		"test_vr_home_info": {
+			"desc": "查看VR房源信息",
+			"method": "get",
+
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok' "
+		}
+	},
+
+	"test_bind_vr_home": {
+		"path": "/v3/clients/{0}/homes/{1}/vr_home_bind",
+
+		"test_bind_vr_home": {
+			"desc": "绑定VR房源",
+			"method": "put",
+			"params": {
+				"vr_resource_id": {}
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('result') == 'ok' "
+		}
+	},
+
+	"test_dismantled_device": {
+		"path": "/v3/device_states",
+
+		"test_dismantled_devcie_list": {
+			"desc": "拆回设备",
+			"method": "get",
+			"params": {
+				"limit": 10,
+				"offset": 0,
+				"state": 6,
+				"client_id": {}
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok' "
+		}
+	},
+
+	"test_openapi_record_search_types": {
+		"path": "/v3/operations/types_new",
+
+		"test_common": {
+			"desc": "第三方接口调用记录筛选条件",
+			"method": "get",
+			"params": {
+				"list_type": "all",
+				"origin": 2
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok'"
+		}
+	},
+
+	"test_openapi_interface_record": {
+		"path": "/v3/operations/openapi",
+
+		"test_openapi_interface_record": {
+			"desc": "第三方接口调用记录",
+			"method": "get",
+			"params": {
+				"end_time": 1577721599999,
+				"start_time": 1577721599999,
+				"limit": 20,
+				"client_id": {},
+				"offset": 0
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok'"
+		}
+	},
+
+	"test_contract": {
+		"path": "/v3/contract_bill/contract",
+
+		"test_clients_contract": {
+			"desc": "合同信息",
+			"method": "get",
+			"params": {
+				"clientId": {},
+				"limit": 10,
+				"offset": 0
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok'"
+		}
+	},
+
+	"test_manager_info": {
+		"path": "/v3/manager/info",
+
+		"test_common": {
+			"desc": "后台登录账号的信息",
+			"method": "get",
+
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok'"
+		}
+	},
+
+	"test_contract_bill_info": {
+		"path": "/v3/contract_bill/bill",
+
+		"test_contract_bill_info": {
+			"desc": "账单信息",
+			"method": "get",
+			"params": {
+				"monthBegin": "2019-08-01 00:00:00",
+				"monthEnd": "2019-12-01 00:00:00",
+				"limit": 10,
+				"offset": 0,
+				"clientId": {}
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok'"
+		}
+	},
+
+	"test_products": {
+		"path": "/v3/products",
+
+		"test_common": {
+			"desc": "产品类型和型号",
+			"method": "get",
+
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok'"
+		}
+	},
+
+	"test_extend_record": {
+		"path": "/v3/contract_bill/extend/record",
+
+		"test_extend_record": {
+			"desc": "延保记录",
+			"method": "get",
+			"params": {
+				"beginTime": "2019-08-01 00:00:00",
+				"endTime": "2019-12-01 00:00:00",
+				"limit": 20,
+				"offset": 0,
+				"clientId": {}
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('err_msg') == 'ok'"
+		}
+	}
+}

@@ -1,0 +1,68 @@
+{
+	"test_tags_list": {
+		"path": "/v3/tags",
+
+		"test_common": {
+			"desc": "商户标签列表",
+			"method": "get",
+			"params": {
+				"offset": 0,
+				"limit": 20
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('result').get('count') != 0"
+		}
+	},
+
+	"test_add_tags": {
+		"path": "/v3/tags",
+
+		"test_existed_tags": {
+			"desc": "添加已存在的商户标签",
+			"method": "post",
+			"params": {
+				"name": "自动化勿动",
+				"desc": "自动化勿动标签定义"
+			},
+			"check_res_code": 400104,
+			"check_res_data": "res.json().get('err_msg') == '标签已经存在'"
+		},
+
+		"test_new_tag": {
+			"desc": "添加新商户标签",
+			"method": "post",
+			"params": {
+				"name": "新增自动化标签名",
+				"desc": "新增自动化标描述"
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('result').get('id') != None"
+		}
+	},
+
+	"test_update_clients_tags": {
+		"path": "/v3/tags/{}",
+
+		"test_update_tag": {
+			"desc": "更新商户标签",
+			"method": "put",
+			"params": {
+				"name": "更新-新增自动化标签名",
+				"desc": "更新-新增自动化标描述"
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('result') == [1]"
+		}
+	},
+
+	"test_delete_tags": {
+		"path": "/v3/tags/{}",
+
+		"test_delete_existed_tag": {
+			"desc": "删除商户标签",
+			"method": "delete",
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('result') == [1]"
+		}
+	}
+}

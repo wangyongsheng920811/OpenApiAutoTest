@@ -1,0 +1,401 @@
+{
+    "test_add_home": {
+        "path": "/v3/homes",
+        
+        "test_add_home_01": {
+            "desc": "添加分散式房源",
+            "method": "post",
+            "params": {
+                "client_id": 91880,
+                "country": "中国",
+                "home_type": 1,
+                "home_name": "{}",
+                "province": "广东省",
+                "city": "深圳市",
+                "district": "南山区",
+                "block": "众冠大厦",
+                "street": "留仙大道1355号",
+                "number": "{}",
+                "lease_type": 1,
+                "description": "ManageAPI-AutoTest"
+                },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('home_id') != None"
+        },
+
+        "test_add_home_02": {
+            "desc": "添加集中式房源",
+            "method": "post",
+            "params": {
+                "client_id": 91880,
+                "country": "中国",
+                "home_type": 2,
+                "home_name": "{}",
+                "province": "广东省",
+                "city": "深圳市",
+                "district": "南山区",
+                "block": "众冠大厦",
+                "street": "留仙大道1355号",
+                "number": "{}",
+                "lease_type": 1,
+                "description": "ManageAPI-AutoTest"
+                },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('home_id') != None"
+        }
+    },
+
+    "test_get_home_info": {
+        "path": "/v3/homes/{}",
+
+        "test_get_home_info": {
+            "desc": "获取房源详情",
+            "method": "get",
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('id') == {}"
+        }
+    },
+
+    "test_get_home_list": {
+        "path": "/v3/homes",
+
+        "test_get_home_list": {
+            "desc": "获取房源列表",
+            "method": "get",
+            "params": {
+                "limit": 10,
+                "offset": 0
+            },
+            "check_res_code": 0,
+            "check_res_data": "Common.check_list_dic({}, res.json().get('result').get('homes'))"
+        }
+    },
+
+    "test_add_room": {
+        "path": "/v3/homes/{}/rooms",
+
+        "test_add_rooms_01": {
+            "desc": "添加分散式房源房间",
+            "method": "post",
+            "params": {"rooms": [{"name": "0001"}, {"name": "0002"}, {"name": "0003"}, {"name": "0004"}, {"name": "0005"}, {"name": "0006"}, {"name": "0007"}, {"name": "0008"}, {"name": "0009"}, {"name":"0010"}]},
+            "check_res_code": 0,
+            "check_res_data": ""
+        },
+
+        "test_add_rooms_02": {
+            "desc": "添加集中式房源房间",
+            "method": "post",
+            "params": {"floor_rooms": [{"floor_num": 4, "rooms": [{"name": "0401"},{"name": "0402"}, {"name": "0403"}]}]},
+            "check_res_code": 0,
+            "check_res_data": ""
+        }
+    },
+
+    "test_get_room_list": {
+        "path": "/v3/homes/{}/rooms",
+
+        "test_get_room_list_01": {
+            "desc": "获取分散式房源下房间列表",
+            "method": "get",
+            "params": {
+                "with_device": 1,
+                "with_tenant": 1
+            },
+            "check_res_code": 0,
+            "check_res_data": "Common.check_list_dic({}, res.json().get('result'))"
+        },
+
+        "test_get_room_list_02": {
+            "desc": "获取集中式房源下房间列表",
+            "method": "get",
+            "params": {
+                "with_device": 1,
+                "with_tenant": 1
+            },
+            "check_res_code": 0,
+            "check_res_data": "Common.check_list_dic({}, res.json().get('result'))"
+        }
+    },
+
+    "test_get_room_info": {
+        "path": "/v3/rooms/{}",
+
+        "test_get_room_info": {
+            "desc": "获取房间详情",
+            "method": "get",
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('id') == {}"
+        }
+    },
+
+    "test_update_room_1": {
+        "path": "/v3/rooms/{}",
+
+        "test_update_room_1": {
+            "desc": "更新单个房间",
+            "method": "put",
+            "params": {"room_name": "1111"},
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('room_id') == {}"
+        }
+    },
+
+    "test_update_room_2": {
+        "path": "/v3/homes/{}/rooms",
+
+        "test_update_room_2": {
+            "desc": "更新多个房间",
+            "method": "put",
+            "params": {"rooms": [{"id": 0, "floor": 2}]},
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') == 'ok'"
+        }
+    },
+
+    "test_update_home": {
+        "path": "/v3/homes/{}",
+
+        "test_update_home": {
+            "desc": "更新房源",
+            "method": "put",
+            "params": {
+                "street": "留仙大道1号",
+                "block": "众冠大厦1",
+                "number": "{}-update",
+                "lease_type": 1,
+                "province": "北京市",
+                "city": "北京市",
+                "district": "西城区"
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') == 'ok'"
+        }
+    },
+
+    "test_get_room_elemeter_setting": {
+        "path": "/v3/rooms/{}/elemeter_setting",
+
+        "test_get_room_elemeter_setting": {
+            "desc": "获取房间用电配置",
+            "method": "get",
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != None"
+        }
+    },
+
+    "test_get_room_charge_list": {
+        "path": "/v3/rooms/{}/elemeter/charge_list",
+
+        "test_get_room_charge_list": {
+            "desc": "获取房间充值记录列表",
+            "method": "get",
+            "params": {
+                "limit": 20,
+                "startTime": 0,
+                "endTime": 0
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != None"
+        }
+    },
+
+    "test_export_room_charge_list": {
+        "path": "/v3/rooms/{}/elemeter/charge_list/export",
+
+        "test_export_room_charge_list": {
+            "desc": "导出房间充值记录列表",
+            "method": "get",
+            "params": {
+                "limit": 20,
+                "startTime": 0,
+                "endTime": 0
+            },
+            "check_res_code": null,
+            "check_res_data": ""
+        }
+    },
+
+    "test_get_room_watermeter_setting": {
+        "path": "/v3/rooms/{}/watermeter_setting",
+
+        "test_get_room_watermeter_setting": {
+            "desc": "获取房间用水配置",
+            "method": "get",
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != None"
+        }
+    },
+
+    "test_get_lock_setting": {
+        "path": "/v3/clients/91880/lock_setting",
+
+        "test_get_room_lock_setting": {
+            "desc": "获取房间安全配置",
+            "method": "get",
+            "params": {
+                "type": "room",
+                "value": "{}"
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != None"
+        },
+        "test_get_home_lock_setting": {
+            "desc": "获取房源安全配置",
+            "method": "get",
+            "params": {
+                "type": "home",
+                "value": "{}"
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != None"
+        }
+    },
+
+    "test_get_room_electric_record": {
+        "path": "/v3/rooms/{}/electric_record",
+
+        "test_get_room_electric_record": {
+            "desc": "获取房间用电记录",
+            "method": "get",
+            "params": {
+                "type": "day",
+                "limit": 10,
+                "start_time": 0,
+                "end_time": 0
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != None"
+        }
+    },
+
+    "test_delete_room": {
+        "path": "/v3/rooms/{}",
+
+        "test_delete_room": {
+            "desc": "删除房间",
+            "method": "delete",
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('room_id') == {}"
+        }
+    },
+
+    "test_room_elemeter_read": {
+        "path": "/v3/rooms/1469971551/elemeters/read",
+
+        "test_common": {
+            "desc": "房间电表读数",
+            "method": "post",
+            "check_res_code": 0,
+            "check_res_data": ""
+        }
+    },
+
+    "test_get_home_list_info": {
+        "path": "/v3/home_list",
+
+        "test_get_home_list_info": {
+            "desc": "获取房源下拉列表",
+            "method": "get",
+            "params": {
+                "client_id": 91880,
+                "limit": 20
+            },
+            "check_res_code": 0,
+            "check_res_data": "Common.check_list_dic({}, res.json().get('result'))"
+        }
+    },
+
+    "test_get_home_devices": {
+        "path": "/v3/homes/{}/devices",
+
+        "test_get_home_devices": {
+            "desc": "获取房源下所有设备信息",
+            "method": "get",
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != None"
+        }
+    },
+
+    "test_get_home_elemeter_setting": {
+        "path": "/v3/homes/{}/elemeter_setting",
+
+        "test_get_home_elemeter_setting": {
+            "desc": "获取房源用电配置",
+            "method": "get",
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != None"
+        }
+    },
+
+    "test_get_home_pool_setting": {
+        "path": "/v3/homes/{}/pool_setting",
+
+        "test_get_home_pool_setting": {
+            "desc": "获取房源公摊配置",
+            "method": "get",
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result').get('use_pool') == True"
+        }
+    },
+
+    "test_get_lock_setting_sub_list": {
+        "path": "/v3/clients/91880/lock_setting/sub_list",
+
+        "test_get_lock_setting_sub_list": {
+            "desc": "获取子层级的门锁提醒设置列表",
+            "method": "get",
+            "params": {
+                "type": "home",
+                "value": "{}"
+            },
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') !=  None"
+        }
+    },
+
+    "test_get_home_watermeter_setting": {
+        "path": "/v3/homes/{}/watermeter_setting",
+
+        "test_get_home_watermeter_setting": {
+            "desc": "获取房源用水配置",
+            "method": "get",
+            "check_res_code": 0,
+            "check_res_data": "res.json().get('result') != None"
+        }
+    },
+
+    "test_get_provinces": {
+        "path": "/v3/provinces",
+
+        "test_common": {
+            "desc": "获取省份列表",
+            "method": "get",
+            "check_res_code": 0,
+            "check_res_data": "len(res.json().get('result')) != 0"
+        }
+    },
+
+    "test_get_cities": {
+        "path": "/v3/cities",
+
+        "test_common": {
+            "desc": "获取城市列表",
+            "method": "get",
+            "params": {"province_id": 19},
+            "check_res_code": 0,
+            "check_res_data": "len(res.json().get('result')) != 0"
+        }
+    },
+
+    "test_get_districts": {
+        "path": "/v3/districts",
+
+        "test_common": {
+            "desc": "获取区县列表",
+            "method": "get",
+            "params": {"city_id": 202},
+            "check_res_code": 0,
+            "check_res_data": "len(res.json().get('result')) != 0"
+        }
+    }
+}

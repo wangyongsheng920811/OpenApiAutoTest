@@ -1,0 +1,50 @@
+{
+	"test_00_audits_list": {
+		"path": "/v3/audits",
+
+		"test_common": {
+			"desc": "审核列表",
+			"method": "get",
+			"params": {
+				"page": 1,
+				"page_size": 10
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('result').get('count') != 0"
+		}
+	},
+	"test_01_add_audits": {
+		"path": "/v3/",
+
+		"test_01_new_": {
+			"desc": "添加新",
+			"method": "post",
+			"params": {
+				"": ""
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('result').get('id') != None"
+		},
+		"test_common_existed_": {
+			"desc": "添加已存在的",
+			"method": "post",
+			"params": {
+				"": ""
+			},
+			"check_res_code": 400104,
+			"check_res_data": "res.json().get('err_msg') == 标签已经存在"
+		}
+	},
+	"test_03_delete_": {
+		"path": "/v3//{}",
+		"test_delete_tag": {
+			"desc": "删除已存在的",
+			"method": "delete",
+			"params": {
+				"": ""
+			},
+			"check_res_code": 0,
+			"check_res_data": "res.json().get('result') == [1]"
+		}
+	}
+}
